@@ -16,4 +16,9 @@ export default class RegisterPage {
   ) {
     await this.registerSection.userRegistration(name, address,password);
   }
+
+  // public async signUpWithGoogleFunctionality(
+  // ) {
+  //   await this.registerSection.signUpWithGoogle();
+  // }
 }

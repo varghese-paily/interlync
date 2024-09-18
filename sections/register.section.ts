@@ -33,19 +33,30 @@ export default class RegisterSection {
         await this.page.fill(rs.password, password)
         await this.page.fill(rs.confirmPassword, password)
         await this.page.locator(rs.registerButton).click()
-        await waitForSelectorWithMinTime(this.page, rs.successMsg)
+        await this.page.waitForTimeout(4000)
 
-        const successMsg = await this.page.locator(rs.successMsg).isVisible()
+        const emailWarnMsg = await this.page
+          .locator(rs.emailWarnMsg)
+          .isVisible()
 
-        if (successMsg) {
-          const txt_success = await this.page
-            .locator(rs.successMsg)
-            .textContent()
-          if (txt_success != 'Registration Successful') {
-            errors.push('user registration failed')
+        if (!emailWarnMsg) {
+          await waitForSelectorWithMinTime(this.page, rs.successMsg)
+
+          const successMsg = await this.page.locator(rs.successMsg).isVisible()
+
+          if (successMsg) {
+            const txt_success = await this.page
+              .locator(rs.successMsg)
+              .textContent()
+            if (txt_success != 'Registration Successful') {
+              errors.push('user registration failed')
+            }
           }
-        } else {
-          const warningMsg = await this.page.locator(rs.warningMsg).isVisible()
+
+        }else {
+          const warningMsg = await this.page
+            .locator(rs.warningMsg)
+            .isVisible()
 
           if (warningMsg) {
             const txt_warning = await this.page
@@ -68,4 +79,40 @@ export default class RegisterSection {
       throw error
     }
   }
+
+  /*
+  public async signUpWithGoogle() // email?: string, // name?: string,
+  // password?: string
+  {
+    try {
+      // if (!email || !password) {
+      //   throw new Error('email and password is undefined')
+      // }
+
+      const registerLink = await this.page.locator(rs.registerLink).isVisible()
+
+      if (registerLink) {
+        await this.page.locator(rs.registerLink).click()
+        await waitForSelectorWithMinTime(this.page, rs.googleBtn)
+
+        const googleBtn = await this.page.locator(rs.googleBtn).isVisible()
+
+        if (googleBtn) {
+          await this.page.locator(rs.googleBtn).click()
+          await waitForSelectorWithMinTime(this.page, rs.signInWithGoogleHeader)
+        } else {
+          errors.push('google button is not visible!')
+        }
+      } else {
+        errors.push('register link is not visible proeprly')
+      }
+      if (errors.length > 0) {
+        throw new Error(`Errors encountered:\n${errors.join('\n')}`)
+      }
+      expect(errors.length).toBe(0)
+    } catch (error) {
+      throw error
+    }
+  }
+  */
 }

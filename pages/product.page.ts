@@ -1,0 +1,16 @@
+import { Page } from "@playwright/test";
+import ProductSection from "../sections/product.section";
+
+export default class ProductPage {
+  page: Page;
+  productSection: ProductSection;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.productSection = new ProductSection(this.page);
+  }
+  public async productsCrudFunctionality(
+  ) {
+    await this.productSection.productsCrud();
+  }
+}

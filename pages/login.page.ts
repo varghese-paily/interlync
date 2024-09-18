@@ -15,4 +15,11 @@ export default class LoginPage {
   ) {
     await this.loginSection.applicationLogin(username, password);
   }
+
+  public async appLoginCommonFunctionality(
+    username?: string,
+    password?: string,
+  ) {
+    await this.loginSection.applicationCommonLogin(username, password);
+  }
 }

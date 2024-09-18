@@ -4,7 +4,7 @@ export async function waitForSelectorWithMinTime(
     page: Page,
     selector,
     minWaitTime = 1000,
-    timeout = 120000
+    timeout = 60000
   ) {
     const startTime = Date.now();
     await page.waitForLoadState("load");
@@ -23,3 +23,7 @@ export async function waitForSelectorWithMinTime(
         }
       });
   }
+
+  export function generateUniqueId() {
+    return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 7);
+}
