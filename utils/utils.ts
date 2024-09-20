@@ -1,4 +1,6 @@
 import { Page } from '@playwright/test'
+import * as fs from 'fs';
+import * as path from 'path';
 
 export async function waitForSelectorWithMinTime(
   page: Page,
@@ -45,3 +47,39 @@ export function getRandomNumberBetween(min: number, max: number): number {
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+
+
+export const getVersionFromJson = (fileName: string): string | null => {
+  try {
+    const filePath = path.resolve(
+      __dirname,
+      '../resources',
+      fileName
+    )
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const jsonData = JSON.parse(fileContent);
+    return jsonData?.metadata?.component?.version || null;
+  } catch (error) {
+    console.error('Error reading or parsing the JSON file:', error);
+    return null;
+  }
+};
+
+export const getFileNamesFromResource = (fileNamePattern?: string): string[] => {
+  try {
+    const resourcePath = path.resolve(__dirname, '../resources');
+    const fileNames = fs.readdirSync(resourcePath);
+    if (fileNamePattern) {
+      return fileNames.filter(file => file.endsWith(fileNamePattern));
+    }
+    return fileNames;
+  } catch (error) {
+    console.error('Error reading the resource folder:', error);
+    return [];
+  }
+};
+
+
+

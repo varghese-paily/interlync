@@ -13,4 +13,9 @@ export default class ProductPage {
   ) {
     await this.productSection.productsCrud();
   }
+
+  public async productsAndVersionSwitchingFunctionality(
+  ) {
+    await this.productSection.productsAndVersionSwitching();
+  }
 }

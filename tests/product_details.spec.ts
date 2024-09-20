@@ -1,6 +1,6 @@
 import { test} from '@playwright/test'
 import * as dotenv from "dotenv";
-import ProductPage from '../pages/product.page';
+import ProductDetailsPage from '../pages/product_details.page';
 import LoginPage from '../pages/login.page';
 
 dotenv.config({ path: "../.env" });
@@ -13,20 +13,12 @@ test.beforeEach(async ({ page }) => {
   await page.goto(url)
 })
 
-test('TC_004 Products CRUD Operation Test', async ({ page }) => {
+test('TC_005 Sbom Upload And Delete Test', async ({ page }) => {
   test.setTimeout(120000)
   const lp = new LoginPage(page)
   await lp.appLoginCommonFunctionality(email, password)
-  const pp = new ProductPage(page)
-  await pp.productsCrudFunctionality() 
-})
-
-test('TC_007 Products And Version Switching Test', async ({ page }) => {
-  test.setTimeout(240000)
-  const lp = new LoginPage(page)
-  await lp.appLoginCommonFunctionality(email, password)
-  const pp = new ProductPage(page)
-  await pp.productsAndVersionSwitchingFunctionality() 
+  const dp = new ProductDetailsPage(page)
+  await dp.productUploadDeleteFunctionality() 
 })
 
 test.afterEach(async ({ page }) => {

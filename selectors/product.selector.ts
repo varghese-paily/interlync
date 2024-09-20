@@ -1,5 +1,5 @@
 class ProductSelectors {
-    public static productLink = "a[href='/vendor/products']"
+    public static productLink = "(//a[@href='/vendor/products'])[1]"
     public static productsHeader = "//a[text()='products']"
     public static addProductButton = "((//div[@class='chakra-stack css-rmxdag'])[2]//button)[3]"
     public static popup = "//section[contains(@id, 'chakra') and @role='dialog']"
@@ -19,6 +19,24 @@ class ProductSelectors {
     public static productSearch = "//input[@placeholder='Search...']"
     public static closeBtn = "//button[contains(@class, 'chakra-modal__close-btn')]"
     public static noRecordMsg= "//div[text()='There are no records to display']"
+    public static firstProduct = "((//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell'])[1]//p)[1]"
+    public static productLists = "((//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']))//div//div//div[1]//div//p"
+    public static getProductName(index:number){
+        return `(((//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']))//div//div//div[1]//div//p)[${index}]`
+    }
+    public static productNameHeader(name:string){
+        return `//div[contains(@class,'product-details')]//*[text()='${name}']`
+    }
+    public static  productSelect = "(//input[@type='text' and @role='combobox'])[1]"
+    public static versionElement(version:string){
+        return `//*[text()='${version}']`
+    }
+    public static versionList = "//div[@data-column-id='SBOMS_PROJECT_VERSION' and @role='cell']"
+    public static getVersion(index:number){
+        return `((//div[@data-column-id='SBOMS_PROJECT_VERSION' and @role='cell'])//p)[${index}]`
+    }
+    public static versionSelect = "(//input[@type='text' and @role='combobox'])[2]"
+    public static versionNameElement = "(//p[contains(@class,'chakra-text')])[6]"
 }  
 export { ProductSelectors }
   

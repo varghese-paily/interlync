@@ -160,4 +160,103 @@ export default class ProductSection {
       throw error
     }
   }
+
+  public async productsAndVersionSwitching() {
+    try {
+      const productLink = await this.page.locator(ps.productLink).isVisible()
+
+      if (productLink) {
+        await this.page.locator(ps.productLink).click()
+        await waitForSelectorWithMinTime(this.page, ps.productsHeader)
+
+        const productsHeader = await this.page
+          .locator(ps.productsHeader)
+          .isVisible()
+
+        if (productsHeader) {
+          const noRecordMsg = await this.page
+            .locator(ps.noRecordMsg)
+            .isVisible()
+
+          if (!noRecordMsg) {
+            const productListLen = (await this.page.$$(ps.productLists)).length
+            let productNameArr: string[] = []
+            let versionListarr: string[] = []
+
+            for (let i = 0; i < productListLen; i++) {
+              const productNameTxt: any = await this.page
+                .locator(ps.getProductName(i + 1))
+                .textContent()
+              productNameArr.push(productNameTxt)
+            }
+
+
+            await this.page.locator(ps.firstProduct).click()
+            await this.page.waitForTimeout(2000)
+            for (let j = 0; j < productNameArr.length; j++) {
+              await this.page.fill(ps.productSelect, productNameArr[j])
+
+              await this.page.press(ps.productSelect, 'Enter')
+              await this.page.waitForTimeout(2000)
+              const productHeaderText: any = await this.page
+                .locator(ps.productNameHeader(productNameArr[j]))
+                .textContent()
+              if (productNameArr[j] != productHeaderText) {
+                errors.push(
+                  `name of the product '${productNameArr[j]}' is not matching with product header and product switching failed!`
+                )
+              } else {
+                const versionListLen = (await this.page.$$(ps.versionList))
+                  .length
+                if (versionListLen > 0) {
+                  for (let k = 0; k < versionListLen; k++) {
+                    const versionTxt: any = await this.page
+                      .locator(ps.getVersion(k + 1))
+                      .textContent()
+                    versionListarr.push(versionTxt)
+                  }
+
+                  for (let l = 0; l < versionListarr.length; l++) {
+                    if(l==0){
+                      await this.page.locator(ps.getVersion(l + 1)).click()
+                    }
+                    await waitForSelectorWithMinTime(
+                      this.page,
+                      ps.versionSelect
+                    )
+                    if(versionListarr.length > 1){
+                      await this.page.fill(ps.versionSelect, versionListarr[l])
+                    }
+                    // await this.page.press(ps.versionSelect, 'Enter')
+                    await this.page.press(ps.versionSelect, 'Tab')
+                    await this.page.waitForTimeout(2000)
+                    const versionNameElementText: any = await this.page
+                      .locator(ps.versionNameElement)
+                      .textContent()
+                    if (versionListarr[l] != versionNameElementText) {
+                      errors.push(
+                        `version of the product '${versionListarr[l]}' is not matching with product and version switching failed!`
+                      )
+                    }
+                  }
+                }
+                versionListarr = []
+              }
+            }
+          }
+        } else {
+          errors.push('products header verification failed')
+        }
+      } else {
+        errors.push('product link is not visible properly!')
+      }
+
+      if (errors.length > 0) {
+        throw new Error(`Errors encountered:\n${errors.join('\n')}`)
+      }
+      expect(errors.length).toBe(0)
+    } catch (error) {
+      throw error
+    }
+  }
 }
