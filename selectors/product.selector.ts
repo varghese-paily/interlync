@@ -24,9 +24,12 @@ class ProductSelectors {
     public static getProductName(index:number){
         return `(((//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']))//div//div//div[1]//div//p)[${index}]`
     }
-    public static productNameHeader(name:string){
-        return `//div[contains(@class,'product-details')]//*[text()='${name}']`
-    }
+    // public static productNameHeader(name:string){
+    //     return `//div[contains(@class,'product-details')]//*[contains(text(),'${name}')]`
+    // }
+    public static productNameHeader =
+         `(//div[contains(@class,'product-details')]//span)[1]`
+    
     public static  productSelect = "(//input[@type='text' and @role='combobox'])[1]"
     public static versionElement(version:string){
         return `//*[text()='${version}']`

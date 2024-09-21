@@ -68,7 +68,7 @@ export default class ProductDetailsSection {
                 } else {
                   await this.page.locator(ds.uploadBtn).click()
                   await waitForSelectorWithMinTime(this.page, ds.uplaodPopup)
-
+                  await this.page.waitForSelector(ds.uplaodPopup,{state:"visible",timeout:5000})
                   const uploadHeaderTxt = await this.page
                     .locator(ds.uploadPopupHeader)
                     .textContent()

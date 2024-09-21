@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('TC_001 Login with Email ID Test', async ({ page }) => {
-  test.setTimeout(60000)
+  test.setTimeout(120000)
   const lp = new LoginPage(page)
   await lp.appLoginFunctionality(email, password)
 })

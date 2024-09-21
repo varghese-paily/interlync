@@ -9,7 +9,7 @@ class ProductDetailsSelectors {
     public static getProduct(name:string){
         return `(//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']//p[text()='${name}'])`
     }
-    public static uploadBtn = "(//div[contains(@class,'product-details')]//button[contains(@class,'chakra-button')])[8]"
+    public static uploadBtn = "(//div[contains(@class,'product-details')]//button[contains(@class,'chakra-button')])[9]"
     public static uplaodPopup = "//section[contains(@class,'chakra-modal__content')]//form"
     public static uploadPopupHeader = "//section[contains(@class,'chakra-modal__content')]//form//p[text()='Upload SBOM']"
     public static uploadFileInput = "//input[@id='fileInput']"

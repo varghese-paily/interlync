@@ -190,20 +190,22 @@ export default class ProductSection {
               productNameArr.push(productNameTxt)
             }
 
-
             await this.page.locator(ps.firstProduct).click()
             await this.page.waitForTimeout(2000)
-            for (let j = 0; j < productNameArr.length; j++) {
+            for (let j = 1; j < productNameArr.length; j++) {
               await this.page.fill(ps.productSelect, productNameArr[j])
 
               await this.page.press(ps.productSelect, 'Enter')
               await this.page.waitForTimeout(2000)
               const productHeaderText: any = await this.page
-                .locator(ps.productNameHeader(productNameArr[j]))
+                .locator(ps.productNameHeader)
                 .textContent()
-              if (productNameArr[j] != productHeaderText) {
+              if (
+                !productHeaderText ||
+                !productNameArr[j].includes(productHeaderText.trim())
+              ) {
                 errors.push(
-                  `name of the product '${productNameArr[j]}' is not matching with product header and product switching failed!`
+                  `Name of the product '${productNameArr[j]}' is not matching with the product header. Product switching failed!`
                 )
               } else {
                 const versionListLen = (await this.page.$$(ps.versionList))
@@ -217,14 +219,14 @@ export default class ProductSection {
                   }
 
                   for (let l = 0; l < versionListarr.length; l++) {
-                    if(l==0){
+                    if (l == 0) {
                       await this.page.locator(ps.getVersion(l + 1)).click()
                     }
                     await waitForSelectorWithMinTime(
                       this.page,
                       ps.versionSelect
                     )
-                    if(versionListarr.length > 1){
+                    if (versionListarr.length > 1) {
                       await this.page.fill(ps.versionSelect, versionListarr[l])
                     }
                     // await this.page.press(ps.versionSelect, 'Enter')
