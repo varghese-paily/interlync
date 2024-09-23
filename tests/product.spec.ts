@@ -21,7 +21,7 @@ test('TC_004 Products CRUD Operation Test', async ({ page }) => {
   await pp.productsCrudFunctionality() 
 })
 
-test('TC_007 Products And Version Switching Test', async ({ page }) => {
+test.only('TC_007 Products And Version Switching Test', async ({ page }) => {
   test.setTimeout(240000)
   const lp = new LoginPage(page)
   await lp.appLoginCommonFunctionality(email, password)

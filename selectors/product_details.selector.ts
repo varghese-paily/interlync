@@ -9,7 +9,8 @@ class ProductDetailsSelectors {
     public static getProduct(name:string){
         return `(//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']//p[text()='${name}'])`
     }
-    public static uploadBtn = "(//div[contains(@class,'product-details')]//button[contains(@class,'chakra-button')])[9]"
+    // public static uploadBtn = "(//div[contains(@class,'product-details')]//button[contains(@class,'chakra-button')])[9]"
+    public static uploadBtn = "//*[@id='root']/div/div[2]/div[2]/div/div[1]/div/div/div[2]/div/div[2]/button[2]"
     public static uplaodPopup = "//section[contains(@class,'chakra-modal__content')]//form"
     public static uploadPopupHeader = "//section[contains(@class,'chakra-modal__content')]//form//p[text()='Upload SBOM']"
     public static uploadFileInput = "//input[@id='fileInput']"
@@ -33,6 +34,9 @@ class ProductDetailsSelectors {
     public static versionSearch = "input[name='versions']"
     public static pNameHeader(name:string){
         return `//span[text()='${name}']`
+    }
+    public static getProductName(index:number){
+        return `(((//div[@data-column-id='PROJECT_GROUPS_NAME' and @role='cell']))//div//div//div[1]//div//p)[${index}]`
     }
 }  
 export { ProductDetailsSelectors }

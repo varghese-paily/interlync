@@ -193,13 +193,15 @@ export default class ProductSection {
             await this.page.locator(ps.firstProduct).click()
             await this.page.waitForTimeout(2000)
             for (let j = 1; j < productNameArr.length; j++) {
+              await this.page.focus(ps.productSelect)
+              await this.page.fill(ps.productSelect, '')
               await this.page.fill(ps.productSelect, productNameArr[j])
-
-              await this.page.press(ps.productSelect, 'Enter')
+              await this.page.press(ps.productSelect, 'Tab')
               await this.page.waitForTimeout(2000)
               const productHeaderText: any = await this.page
                 .locator(ps.productNameHeader)
                 .textContent()
+
               if (
                 !productHeaderText ||
                 !productNameArr[j].includes(productHeaderText.trim())
