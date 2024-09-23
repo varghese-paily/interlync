@@ -15,7 +15,7 @@ class ProductDetailsSelectors {
     public static uploadPopupHeader = "//section[contains(@class,'chakra-modal__content')]//form//p[text()='Upload SBOM']"
     public static uploadFileInput = "//input[@id='fileInput']"
     public static upload = "//button[@type='submit']"
-    public static uploadSuccessMsg = "//p[text()='SBOM uploaded successfully and is now processing']"
+    public static uploadSuccessMsg = "(//p[text()='SBOM uploaded successfully and is now processing'])[1]"
     public static versionBtn = "//button[text()='versions']"
     public static versionElement(version:string){
         return `//*[text()='${version}']`
