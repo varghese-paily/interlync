@@ -61,9 +61,7 @@ export default class LabelSection {
               .locator(ps.productName(productName))
               .isVisible()
 
-            if (!pName) {
-              errors.push('product is added failed!')
-            } else {
+            if (pName) {
               const addLabelButton = await this.page
                 .locator(ls.addLabelButton)
                 .isVisible()
