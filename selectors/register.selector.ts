@@ -12,7 +12,7 @@ class RegisterSelectors {
     public static email = "input[type='email']"
     public static emailWarning = "//div[text()='Couldn’t find your Google Account']"
     public static emailPassword = "input[type='password']"
-    public static emailWarnMsg = "//p[text()='Email has already been taken']"
+    public static emailWarnMsg = "//*[text()='Email has already been taken']"
 
 }  
 export { RegisterSelectors }
