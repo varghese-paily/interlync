@@ -239,68 +239,6 @@ export default class LabelSection {
                             }
                           }
                         }
-
-                        // await this.page.locator(ls.menuBtn).click()
-                        // await waitForSelectorWithMinTime(this.page, ls.addLabelBtn)
-                        // await this.page.locator(ls.addLabelBtn).click()
-
-                        // const labelListLength = (await this.page.$$(ls.labelLists))
-                        //   .length
-
-                        // const labelListArr: string[] = []
-                        // for (let i = 0; i < labelListLength; i++) {
-                        //    await this.page
-                        //   .locator(ls.getLabelName(i + 1)).scrollIntoViewIfNeeded()
-                        //   await this.page.waitForTimeout(2000)
-                        //   lName = await this.page
-                        //     .locator(ls.getLabelName(i + 1))
-                        //     .textContent()
-                        //   labelListArr.push(lName)
-                        // }
-                        // if (!labelListArr.includes(lName)) {
-                        //   errors.push('label not found!')
-                        // } else {
-                        //   const index = labelArr.indexOf(labelName)
-                        //   if(index>=0){
-                        //     await this.page
-                        //     .locator(ls.getLabelCheckBox(index + 1))
-                        //     .click()
-
-                        //   await this.page.locator(ls.productsHeader).click()
-                        //   await this.page.waitForTimeout(2000)
-                        //   await this.page.locator(ls.labelFilterBtn).click()
-
-                        //   const labelListItemLength = (
-                        //     await this.page.$$(ls.labelLists)
-                        //   ).length
-
-                        //   const labelLisItemtArr: string[] = []
-
-                        //   for (let i = 0; i < labelListItemLength; i++) {
-                        //     const labelListItemName: any = await this.page
-                        //       .locator(ls.getLabelList(i + 1))
-                        //       .textContent()
-                        //     labelLisItemtArr.push(labelListItemName)
-                        //   }
-
-                        //   const indexOfLabel = labelLisItemtArr.indexOf(labelName)
-
-                        //   await this.page
-                        //     .locator(ls.getLabelList(indexOfLabel))
-                        //     .click()
-                        //   await this.page.locator(ls.productsHeader).click()
-                        //   await this.page.waitForTimeout(2000)
-                        //   const productWithLabelName = await this.page
-                        //     .locator(ls.productWithLabelName(labelName))
-                        //     .isVisible()
-
-                        //   if (!productWithLabelName) {
-                        //     errors.push(
-                        //       `label filter failed for label name '${labelName}'`
-                        //     )
-                        //   }
-                        //   }
-                        // }
                       }
                     }
                   }
@@ -313,15 +251,6 @@ export default class LabelSection {
             }
           }
         }
-        // const productsHeader = await this.page
-        //   .locator(ls.productsHeader)
-        //   .isVisible()
-
-        // if (productsHeader) {
-
-        // } else {
-        //   errors.push('products header verification failed')
-        // }
       } else {
         errors.push('product link is not visible properly!')
       }
