@@ -115,7 +115,8 @@ export default class LabelSection {
                       errors.push('label not found!')
                     } else {
                       const index = labelArr.indexOf(labelName)
-                      await this.page
+                      if(index>=0){
+                        await this.page
                         .locator(ls.getLabelCheckBox(index + 1))
                         .click()
 
@@ -151,6 +152,7 @@ export default class LabelSection {
                         errors.push(
                           `label filter failed for label name '${labelName}'`
                         )
+                      }
                       }
                     }
                   }
