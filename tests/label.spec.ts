@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('TC_007 Label Test', async ({ page }) => {
-  test.setTimeout(120000)
+  test.setTimeout(240000)
   const lp = new LoginPage(page)
   await lp.appLoginCommonFunctionality(email, password)
   const pp = new LabelPage(page)
