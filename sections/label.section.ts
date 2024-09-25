@@ -27,9 +27,6 @@ export default class LabelSection {
         await this.page.locator(ls.productLink).click()
         await waitForSelectorWithMinTime(this.page, ls.productsHeader)
 
-        await this.page.locator(ps.productLink).click()
-        await waitForSelectorWithMinTime(this.page, ps.productsHeader)
-
         const productsHeader = await this.page
           .locator(ps.productsHeader)
           .isVisible()
